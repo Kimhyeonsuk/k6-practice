@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package hello;
+
+import "type.proto";
+
+service HelloService {
+  rpc SayHello(HelloRequest) returns (HelloResponse);
+  rpc LotsOfReplies(HelloRequest) returns (stream HelloResponse);
+  rpc LotsOfGreetings(stream HelloRequest) returns (HelloResponse);
+  rpc BidiHello(stream HelloRequest) returns (stream HelloResponse);
+}
+
+message HelloRequest {
+  optional string greeting = 1;
+  repeated Person person= 2;
+}
+
+message HelloResponse {
+  required string reply = 1;
+}
