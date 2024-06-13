@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package hello;
 
-import "type.proto";
+import "type/type.proto";
 
 service HelloService {
   rpc SayHello(HelloRequest) returns (HelloResponse);
@@ -17,5 +17,5 @@ message HelloRequest {
 }
 
 message HelloResponse {
-  required string reply = 1;
+  string reply = 1;
 }

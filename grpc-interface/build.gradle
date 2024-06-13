@@ -48,6 +48,16 @@ protobuf {
     }
 }
 
+sourceSets {
+    main {
+        proto {
+            srcDir 'src/main/proto/type'
+            srcDir 'src/main/proto/message'
+        }
+    }
+}
+
+
 //test {
 //    useJUnitPlatform()
 //}
