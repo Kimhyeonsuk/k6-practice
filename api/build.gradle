@@ -31,8 +31,9 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 	//grpc
-	implementation 'net.devh:grpc-server-spring-boot-starter'
-	implementation ''
+	implementation files('../grpc-interface/build/libs/grpc-interface-1.0-SNAPSHOT.jar')
+	implementation 'net.devh:grpc-server-spring-boot-starter:2.13.1.RELEASE'
+
 }
 
 tasks.named('test') {
