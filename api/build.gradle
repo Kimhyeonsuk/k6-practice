@@ -30,6 +30,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
 	//grpc
 	implementation files('../grpc-interface/build/libs/grpc-interface-1.0-SNAPSHOT.jar')
 	implementation 'net.devh:grpc-server-spring-boot-starter:2.13.1.RELEASE'
