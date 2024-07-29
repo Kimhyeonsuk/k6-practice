@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package hello;
 
+import "../type/type.proto";
+
 service HelloService {
   rpc SayHello(HelloRequest) returns (HelloResponse);
   rpc LotsOfReplies(HelloRequest) returns (stream HelloResponse);
@@ -11,10 +13,9 @@ service HelloService {
 
 message HelloRequest {
   optional string greeting = 1;
-  Person person= 2;
-  
+  repeated Person person= 2;
 }
 
 message HelloResponse {
-  required string reply = 1;
+  string reply = 1;
 }

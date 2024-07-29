@@ -1,5 +1,5 @@
-import http from 'k6/http';
-import { sleep } from 'k6';
+import grpc from 'k6/net/grpc';
+import { check, sleep } from 'k6';
 
 export const options = {
   // A number specifying the number of VUs to run concurrently.
@@ -53,7 +53,28 @@ export const options = {
 // See https://grafana.com/docs/k6/latest/examples/get-started-with-k6/ to learn more
 // about authoring k6 scripts.
 //
-export default function() {
-  http.get('https://test.k6.io');
-  sleep(1);
-}
+// export default function() {
+//   http.get('https://test.k6.io');
+//   sleep(1);
+// }
+
+const client = new grpc.Client();
+client.load(['../idl/message'], 'hello.proto')
+
+export default() => {
+  client.connect('127.0.0.1:9090', { reflect: true });
+
+    const person = { name : "hyeonsuk", age : 29 }
+    const request = { greeting: "hello", person : person}
+
+    const response = client.invoke('hello.HelloService/sayHello', request);
+
+    check(response, {
+        'status is OK': (r) => r && r.status === grpc.StatusOK,
+    });
+
+    console.log(JSON.stringify(response));
+
+    client.close();
+    sleep(1);
+};
